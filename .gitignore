@@ -1,0 +1,9 @@
+node_modules
+.vscode
+dist
+data
+!src/data
+coverage
+.yarn-integrity
+yarn.lock
+globalConfig.json
