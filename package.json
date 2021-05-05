@@ -1,0 +1,13 @@
+{
+  "name": "petlovers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ismael de Jesus <mael.dazareia@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/main/server.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
+}
