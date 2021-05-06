@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "build": "tsc"
+    "build": "rimraf dist && tsc"
   },
   "devDependencies": {
     "@types/node": "^15.0.2",
@@ -21,6 +21,7 @@
     "husky": "4",
     "lint-staged": "^10.5.4",
     "nodemon": "^2.0.7",
+    "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }
