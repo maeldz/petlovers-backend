@@ -37,7 +37,9 @@
     "express": "^4.17.1",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.6.2"
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.6.2",
+    "sequelize-typescript": "^2.1.0"
   },
   "_moduleAliases": {
     "@": "dist/app"

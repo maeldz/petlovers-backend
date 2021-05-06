@@ -9,7 +9,9 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["app/*"]
-    }
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": [
     "src"
