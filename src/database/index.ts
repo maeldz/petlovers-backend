@@ -1,5 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
-import User from '@/models/User'
+import { User } from '@/models'
 import databaseConfig from '../config/database'
 
 const models = [User]
