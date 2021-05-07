@@ -1,8 +1,8 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
-import { User, Dog, Breed } from '@/models'
+import { User, Dog, Breed, File } from '@/models'
 import databaseConfig from '../config/database'
 
-const models = [User, Dog, Breed]
+const models = [User, Dog, Breed, File]
 
 class Database {
   connection: Sequelize
