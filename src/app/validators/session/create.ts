@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import { Request, Response, NextFunction } from 'express'
 
-export const sessionStoreValidator = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+export const sessionCreateValidator = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
   try {
     const schema = Yup.object().shape({
       email: Yup.string()
