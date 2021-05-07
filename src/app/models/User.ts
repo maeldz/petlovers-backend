@@ -1,4 +1,4 @@
-import { Table, Column, Model, BeforeSave } from 'sequelize-typescript'
+import { Table, Column, Model, BeforeSave, DataType } from 'sequelize-typescript'
 import bcrypt from 'bcrypt'
 
 @Table
@@ -9,11 +9,14 @@ export class User extends Model {
   @Column
   email: string
 
+  @Column(DataType.VIRTUAL)
+  password: string
+
   @Column
   password_hash: string
 
   @BeforeSave
-  static async hashPassword (user: any): Promise<void> {
+  static async hashPassword (user: User): Promise<void> {
     if (user.password) {
       user.password_hash = await bcrypt.hash(user.password, 8)
     }
