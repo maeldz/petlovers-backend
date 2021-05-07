@@ -1,3 +1,3 @@
-export * from './User'
-export * from './Dog'
-export * from './Breed'
+export * from './user'
+export * from './dog'
+export * from './breed'

@@ -1,3 +1,3 @@
-export * from './UserController'
-export * from './SessionController'
-export * from './DogController'
+export * from './user'
+export * from './session'
+export * from './dog'
