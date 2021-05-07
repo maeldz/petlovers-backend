@@ -1,8 +1,13 @@
-import { Table, Column, Model, BeforeSave, DataType } from 'sequelize-typescript'
+import { Table, Column, Model, BeforeSave, ForeignKey, DataType } from 'sequelize-typescript'
 import bcrypt from 'bcrypt'
+import { File } from '@/models'
 
 @Table
 export class User extends Model {
+  @ForeignKey(() => File)
+  @Column
+  avatar_id: number
+
   @Column
   name: string
 

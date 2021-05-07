@@ -1,11 +1,15 @@
 import { Table, Column, Model, ForeignKey } from 'sequelize-typescript'
-import { Breed, User } from '@/models'
+import { Breed, User, File } from '@/models'
 
 @Table
 export class Dog extends Model {
   @ForeignKey(() => User)
   @Column
   owner_id: number
+
+  @ForeignKey(() => File)
+  @Column
+  image_id: number
 
   @Column
   name: string
