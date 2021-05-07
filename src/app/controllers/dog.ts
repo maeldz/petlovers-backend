@@ -4,12 +4,9 @@ import { Dog, Breed } from '@/models'
 export class DogController {
   async index (req: Request, res: Response): Promise<Response> {
     const { breed, dewormed, neutered } = req.query
+    const filter = req.query?.myDogs ? { owner_id: req.userId } : { breed, dewormed, neutered }
     const dogs = await Dog.findAll({
-      where: {
-        breed,
-        dewormed,
-        neutered
-      }
+      where: filter
     })
 
     return res.json(dogs)
@@ -21,10 +18,11 @@ export class DogController {
     const {
       id,
       name,
+      birthday,
       dewormed,
       neutered
     } = await Dog.create(req.body)
 
-    return res.json({ id, breed, name, dewormed, neutered })
+    return res.json({ id, breed, name, birthday, dewormed, neutered })
   }
 }
