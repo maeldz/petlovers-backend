@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { UserController, SessionController, DogController } from '@/controllers'
-import { userCreateValidator, userUpdateValidator, sessionCreateValidator, dogCreateValidator } from '@/validators'
+import { userCreateValidator, userUpdateValidator, sessionCreateValidator, dogCreateValidator, dogFindAllValidator } from '@/validators'
 import authMiddleware from '@/middlewares/auth'
 
 const routes = Router()
@@ -11,5 +11,6 @@ routes.post('/users', userCreateValidator, new UserController().store)
 routes.put('/users', authMiddleware, userUpdateValidator, new UserController().update)
 
 routes.post('/dogs', authMiddleware, dogCreateValidator, new DogController().store)
+routes.get('/dogs', authMiddleware, dogFindAllValidator, new DogController().index)
 
 export default routes
