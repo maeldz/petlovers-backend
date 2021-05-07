@@ -4,6 +4,7 @@ import { Breed, User } from '@/models'
 @Table
 export class Dog extends Model {
   @ForeignKey(() => User)
+  @Column
   owner_id: number
 
   @Column
