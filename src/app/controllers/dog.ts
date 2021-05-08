@@ -1,12 +1,20 @@
 import { Request, Response } from 'express'
-import { Dog, Breed } from '@/models'
+import { Dog, Breed, File } from '@/models'
 
 export class DogController {
   async index (req: Request, res: Response): Promise<Response> {
     const { breed, dewormed, neutered } = req.query
     const filter = req.query?.myDogs ? { owner_id: req.userId } : { breed, dewormed, neutered }
     const dogs = await Dog.findAll({
-      where: filter
+      where: filter,
+      attributes: ['id', 'owner_id', 'name', 'birthday', 'breed', 'dewormed', 'neutered'],
+      include: [
+        {
+          model: File,
+          as: 'image',
+          attributes: ['id', 'path', 'url']
+        }
+      ]
     })
 
     return res.json(dogs)
