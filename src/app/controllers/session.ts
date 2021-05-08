@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import { User } from '@/models'
+import { User, File } from '@/models'
 import authConfig from '../../config/auth'
 
 export class SessionController {
@@ -8,7 +8,14 @@ export class SessionController {
     const { email, password } = req.body
 
     const user = await User.findOne({
-      where: { email }
+      where: { email },
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url']
+        }
+      ]
     })
 
     if (!user) {
@@ -19,13 +26,14 @@ export class SessionController {
       return res.status(401).json({ error: 'Password does not match' })
     }
 
-    const { id, name } = user
+    const { id, name, avatar } = user
 
     return res.json({
       user: {
         id,
         name,
-        email
+        email,
+        avatar
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expires
