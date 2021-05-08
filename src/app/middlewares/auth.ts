@@ -6,7 +6,7 @@ type Payload = {
   id: number
 }
 
-export default async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
   const authHeader = req.headers.authorization
   if (!authHeader) {
     return res.status(401).json({ error: 'Token not provided' })
