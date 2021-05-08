@@ -13,6 +13,6 @@ routes.put('/users', authMiddleware, userUpdateValidator, new UserController().u
 routes.post('/dogs', authMiddleware, dogCreateValidator, new DogController().store)
 routes.get('/dogs', authMiddleware, dogFindAllValidator, new DogController().index)
 
-routes.post('/files', uploadMiddleware('file'), new FileController().store)
+routes.post('/files', authMiddleware, uploadMiddleware('file'), new FileController().store)
 
 export default routes
