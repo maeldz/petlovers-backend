@@ -1,4 +1,4 @@
-import { Table, Column, Model, ForeignKey } from 'sequelize-typescript'
+import { Table, Column, Model, ForeignKey, BelongsTo } from 'sequelize-typescript'
 import { Breed, User, File } from '@/models'
 
 @Table
@@ -7,9 +7,8 @@ export class Dog extends Model {
   @Column
   owner_id: number
 
-  @ForeignKey(() => File)
-  @Column
-  image_id: number
+  @BelongsTo(() => File, 'image_id')
+  image: File
 
   @Column
   name: string
