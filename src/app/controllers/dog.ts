@@ -26,11 +26,12 @@ export class DogController {
     const {
       id,
       name,
+      owner_id: ownerId,
       birthday,
       dewormed,
       neutered
-    } = await Dog.create(req.body)
+    } = await Dog.create({ ...req.body, owner_id: req.userId })
 
-    return res.json({ id, breed, name, birthday, dewormed, neutered })
+    return res.json({ id, ownerId, breed, name, birthday, dewormed, neutered })
   }
 }
