@@ -10,6 +10,6 @@ export class File extends Model {
 
   @Column(DataType.VIRTUAL)
   get url (): string {
-    return `http://localhost:3333/files/${this.path}`
+    return `${process.env.APP_URL}/files/${this.path}`
   }
 }
