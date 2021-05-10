@@ -4,9 +4,21 @@ import { Dog, Breed, File } from '@/models'
 export class DogController {
   async index (req: Request, res: Response): Promise<Response> {
     const { breed, dewormed, neutered } = req.query
-    const filter = req.query?.myDogs ? { owner_id: req.userId } : { breed, dewormed, neutered }
+
+    const getFilters = (): any => {
+      const filters: any = {}
+      if (req.query?.myDogs) {
+        filters.owner_id = req.userId
+      } else {
+        filters.breed = breed
+        dewormed === 'true' && (filters.dewormed = true)
+        neutered === 'true' && (filters.neutered = true)
+      }
+      return filters
+    }
+
     const dogs = await Dog.findAll({
-      where: filter,
+      where: getFilters(),
       attributes: ['id', 'owner_id', 'name', 'birthday', 'breed', 'dewormed', 'neutered'],
       include: [
         {
