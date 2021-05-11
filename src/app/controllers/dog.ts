@@ -33,7 +33,7 @@ export class DogController {
   }
 
   async store (req: Request, res: Response): Promise<Response> {
-    const { breed } = req.body
+    const { breed, imageId } = req.body
     await Breed.findOrCreate({ where: { name: breed } })
     const {
       id,
@@ -42,8 +42,13 @@ export class DogController {
       birthday,
       dewormed,
       neutered
-    } = await Dog.create({ ...req.body, owner_id: req.userId })
+    } = await Dog.create({ ...req.body, owner_id: req.userId, image_id: imageId })
 
-    return res.json({ id, ownerId, breed, name, birthday, dewormed, neutered })
+    const image = await File.findOne({
+      where: { id: imageId },
+      attributes: ['id', 'path', 'url']
+    })
+
+    return res.json({ id, ownerId, breed, name, birthday, dewormed, neutered, image })
   }
 }
