@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { User } from '@/models'
+import { User, File } from '@/models'
 
 export class UserController {
   async store (req: Request, res: Response): Promise<Response> {
@@ -19,7 +19,7 @@ export class UserController {
   }
 
   async update (req: Request, res: Response): Promise<Response> {
-    const { email, oldPassword, name } = req.body
+    const { email } = req.body
     const user = await User.findByPk(req.userId)
 
     if (email !== user.email) {
@@ -29,11 +29,22 @@ export class UserController {
       }
     }
 
-    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+    if (req.body?.oldPassword && !(await user.checkPassword(req.body.oldPassword))) {
       return res.status(401).json({ error: 'Password does not match' })
     }
 
     await user.update(req.body)
-    return res.json({ id: user.id, name, email })
+
+    const { id, name, avatar } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url']
+        }
+      ]
+    })
+
+    return res.json({ id, name, avatar })
   }
 }
