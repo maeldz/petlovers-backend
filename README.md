@@ -29,6 +29,7 @@ API REST do Petlovers.
 - Crie uma conexão com um banco de dados postgres.
 - Faça uma cópia do arquivo `.env.example` e o renomeie para `.env`
 - Preencha-o de acordo com os dados da sua conexão.
+- Rode as migrations do Sequelize com o comando `npx sequelize db:migrate`.
 
 ##### Scripts
 
